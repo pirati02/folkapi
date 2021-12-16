@@ -1,6 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const NodemonPlugin = require('nodemon-webpack-plugin');
+const TransformModule = require('babel-plugin-transform-runtime');
 
 module.exports = {
   entry: {
@@ -29,10 +30,8 @@ module.exports = {
         }
       }
     ]
-  },
+  }, 
   plugins:  [
-    ["@babel/plugin-transform-runtime", {
-      "corejs": 2
-  }]
+     new TransformModule()
   ]
 }
