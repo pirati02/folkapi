@@ -10,7 +10,7 @@ router.get("/ensembles", async (req, res) => {
   res.send(ensembles);
 });
 
-router.get("/old-recording", async (req, res) => {
+router.get("/old-recordings", async (req, res) => {
   const ensembles =  await folkapiService.oldRecordings();
   res.send(ensembles);
 });

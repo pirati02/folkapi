@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rm -rf dist && webpack --mode production",
     "dev": "rm -rf dist && webpack --mode development && nodemon ./dist/server.js",
-    "start": "node ./dist/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -19,6 +19,7 @@ class FolkApiService {
         return this.dao
             .all(`SELECT * FROM "Ensembles" WHERE "ArtistType" = $1`, [2])
             .then(({rows}) => {
+                console.log({rows})
                 return rows.map(item => new Ensemble(item.Id, item.Name, item.ArtistType))
             }).catch(console.log)
     }
