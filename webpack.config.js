@@ -1,7 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const NodemonPlugin = require('nodemon-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -32,7 +31,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new NodemonPlugin(),
-    new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
+    new NodemonPlugin()
   ]
 }
