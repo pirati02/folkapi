@@ -1,6 +1,7 @@
-const path = require('path')
-const nodeExternals = require('webpack-node-externals')
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 const NodemonPlugin = require('nodemon-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
