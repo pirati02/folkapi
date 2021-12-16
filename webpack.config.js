@@ -31,6 +31,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new NodemonPlugin()
+    new NodemonPlugin(),
+    new webpack.IgnorePlugin({ resourceRegExp: /^pg-native$/ })
   ]
 }
