@@ -31,6 +31,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new NodemonPlugin()
+    new NodemonPlugin(),
+    ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
   ]
 }
