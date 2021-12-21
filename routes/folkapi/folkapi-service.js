@@ -23,6 +23,14 @@ class FolkApiService {
             }).catch(console.log)
     }
 
+    ensemble(id) {
+        return this.dao
+            .all(`SELECT * FROM "Ensembles" WHERE "Id" = $1`, [id])
+            .then(({rows}) => {
+                return rows.map(item => new Ensemble(item.Id, item.Name, item.ArtistType))
+            }).catch(console.log)
+    }
+
     songsByEnsembleId(artistId) {
         return this.dao
             .all(`SELECT * FROM "Songs" WHERE "EnsembleId" = $1 and "SongType" = $2`, [artistId, 0])

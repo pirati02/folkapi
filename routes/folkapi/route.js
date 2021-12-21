@@ -15,6 +15,12 @@ router.get("/old-recordings", async (req, res) => {
   res.send(ensembles);
 });
 
+router.get("/ensemble/:id", async (req, res) => {
+  const id = req.params.id;
+  const ensemble =  await folkapiService.ensemble(id);
+  res.send(ensemble);
+});
+
 router.get("/songs/:id", async (req, res) => {
   const id = req.params.id;
   const songs =  await folkapiService.songsByEnsembleId(id);
