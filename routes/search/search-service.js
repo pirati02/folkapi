@@ -17,9 +17,11 @@ class SearchService {
 
     searchSong(term) {
         return this.dao
-            .all(`SELECT * FROM "Songs" WHERE "Title" like $1`, ['%' + term + '%'])
+            .all(`SELECT songs.*, ensembles."Name" as "EnsembleName"  FROM "Songs" songs  
+                   JOIN "Ensembles" ensembles ON songs."EnsembleId" = ensembles."Id"
+                WHERE songs."Title" like $1`, ['%' + term + '%'])
             .then(({rows}) => {
-                return rows.map(item => new Song(item.Id, item.Title, item.SongType, item.EnsembleId, item.Path))
+                return rows.map(item => new Song(item.Id, item.Title, item.SongType, item.EnsembleId, item.Path, item.EnsembleName))
             }).catch(console.log)
     }
 }

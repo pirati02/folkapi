@@ -55,7 +55,7 @@ eval("class SearchResult {\n  constructor(id, name, entityType, parentId) {\n   
   \************************/
 /***/ ((module) => {
 
-eval("class Song {\n  constructor(id, name, songType, ensembleId, path) {\n    this.id = id;\n    this.name = name;\n    this.songType = songType;\n    this.ensembleId = ensembleId;\n    this.path = path;\n  }\n\n}\n\nmodule.exports = Song;\n\n//# sourceURL=webpack://folkapi/./entity/song.js?");
+eval("class Song {\n  constructor(id, name, songType, ensembleId, path, ensembleName) {\n    this.id = id;\n    this.name = name;\n    this.songType = songType;\n    this.ensembleId = ensembleId;\n    this.path = path;\n    this.ensembleName = ensembleName;\n  }\n\n}\n\nmodule.exports = Song;\n\n//# sourceURL=webpack://folkapi/./entity/song.js?");
 
 /***/ }),
 
@@ -95,7 +95,7 @@ eval("function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg)
   \*****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("var SearchResult = __webpack_require__(/*! ../../entity/search.result */ \"./entity/search.result.js\");\n\nvar Ensemble = __webpack_require__(/*! ../../entity/ensemble */ \"./entity/ensemble.js\");\n\nvar Song = __webpack_require__(/*! ../../entity/song */ \"./entity/song.js\");\n\nclass SearchService {\n  constructor(appDao) {\n    this.dao = appDao;\n  }\n\n  searchEnsembles(term) {\n    return this.dao.all(\"SELECT * FROM \\\"Ensembles\\\" WHERE \\\"Name\\\" like $1\", ['%' + term + '%']).then((_ref) => {\n      var {\n        rows\n      } = _ref;\n      return rows.map(item => new Ensemble(item.Id, item.Name, item.ArtistType));\n    }).catch(console.log);\n  }\n\n  searchSong(term) {\n    return this.dao.all(\"SELECT * FROM \\\"Songs\\\" WHERE \\\"Title\\\" like $1\", ['%' + term + '%']).then((_ref2) => {\n      var {\n        rows\n      } = _ref2;\n      return rows.map(item => new Song(item.Id, item.Title, item.SongType, item.EnsembleId, item.Path));\n    }).catch(console.log);\n  }\n\n}\n\nmodule.exports = SearchService;\n\n//# sourceURL=webpack://folkapi/./routes/search/search-service.js?");
+eval("var SearchResult = __webpack_require__(/*! ../../entity/search.result */ \"./entity/search.result.js\");\n\nvar Ensemble = __webpack_require__(/*! ../../entity/ensemble */ \"./entity/ensemble.js\");\n\nvar Song = __webpack_require__(/*! ../../entity/song */ \"./entity/song.js\");\n\nclass SearchService {\n  constructor(appDao) {\n    this.dao = appDao;\n  }\n\n  searchEnsembles(term) {\n    return this.dao.all(\"SELECT * FROM \\\"Ensembles\\\" WHERE \\\"Name\\\" like $1\", ['%' + term + '%']).then((_ref) => {\n      var {\n        rows\n      } = _ref;\n      return rows.map(item => new Ensemble(item.Id, item.Name, item.ArtistType));\n    }).catch(console.log);\n  }\n\n  searchSong(term) {\n    return this.dao.all(\"SELECT songs.*, ensembles.\\\"Name\\\" as \\\"EnsembleName\\\"  FROM \\\"Songs\\\" songs  \\n                   JOIN \\\"Ensembles\\\" ensembles ON songs.\\\"EnsembleId\\\" = ensembles.\\\"Id\\\"\\n                WHERE songs.\\\"Title\\\" like $1\", ['%' + term + '%']).then((_ref2) => {\n      var {\n        rows\n      } = _ref2;\n      console.log(rows);\n      return rows.map(item => new Song(item.Id, item.Title, item.SongType, item.EnsembleId, item.Path, item.EnsembleName));\n    }).catch(console.log);\n  }\n\n}\n\nmodule.exports = SearchService;\n\n//# sourceURL=webpack://folkapi/./routes/search/search-service.js?");
 
 /***/ }),
 
