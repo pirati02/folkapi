@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Database = require('./database')
+const Database = require('../../context/database')
 const FolkApiService = require('./folkapi-service')
 
 const folkapiService = new FolkApiService(new Database())

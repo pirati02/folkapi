@@ -1,5 +1,5 @@
-var Ensemble = require('./ensemble');
-var Song = require('./song')
+const Ensemble = require('../../entity/ensemble');
+const Song = require('../../entity/song');
 
 class FolkApiService {
 

@@ -3,6 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const folkapiRoute = require('./routes/folkapi/route');
+const searchApiRoute = require('./routes/search/route');
 const { env } = require('process');
 const server = express();
 
@@ -11,6 +12,7 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(cookieParser());
 server.use('/folkapi', folkapiRoute);
+server.use('/search', searchApiRoute);
 
 // catch 404 and forward to error handler
 server.use(function(req, res, next) {
@@ -29,6 +31,6 @@ server.use(function(err, req, res, next) {
 const port = process.env.PORT || 3000;
   
 server.listen(port, () => {
-  console.log(`listening on ${env.PORT}`)
+  console.log(`listening on ${port}`)
 })
 module.exports = server;
