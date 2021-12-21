@@ -27,7 +27,7 @@ class FolkApiService {
         return this.dao
             .all(`SELECT * FROM "Ensembles" WHERE "Id" = $1`, [id])
             .then(({rows}) => {
-                return rows.map(item => new Ensemble(item.Id, item.Name, item.ArtistType))
+                return rows.map(item => new Ensemble(item.Id, item.Name, item.ArtistType))[0]
             }).catch(console.log)
     }
 
@@ -35,7 +35,6 @@ class FolkApiService {
         return this.dao
             .all(`SELECT * FROM "Songs" WHERE "EnsembleId" = $1 and "SongType" = $2`, [artistId, 0])
             .then(({rows}) => {
-                console.log(rows)
                 return rows.filter(item => item.IsDeleted === "0").map(item => new Song(item.Id, item.Title, item.SongType, item.EnsembleId, item.Path))
             }).catch(console.log)
     }
@@ -44,7 +43,6 @@ class FolkApiService {
         return this.dao
             .all(`SELECT * FROM "Songs" WHERE "EnsembleId" = $1 and "SongType" = $2`, [artistId, 1])
             .then(({rows}) => {
-                console.log(rows)
                 return rows.filter(item => item.IsDeleted === "0").map(item => new Song(item.Id, item.Title, item.SongType, item.EnsembleId, item.Path))
             }).catch(console.log)
     }
